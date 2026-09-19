@@ -160,8 +160,8 @@ function updateEmptyState(filteredTodos) {
 
   const emptyMessages = {
     all: "還沒有任何待辦事項,新增一個吧!",
-    active: "沒有未完成的待辦事項",
-    completed: "沒有已完成的待辦事項",
+    active: "目前沒有未完成的事項。這不是刪除，請切換到「全部」查看所有待辦。",
+    completed: "目前沒有已完成的事項。這不是刪除，請切換到「全部」或「未完成」查看其他待辦。",
   };
 
   emptyState.textContent = emptyMessages[currentFilter] || emptyMessages.all;
