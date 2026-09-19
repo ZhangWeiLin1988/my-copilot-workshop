@@ -17,6 +17,11 @@
   --filter-active-bg: rgba(15, 118, 110, 0.12);
   --filter_active_text: #0f766e;
   --toggle-border: rgba(15, 23, 42, 0.08);
+  --clear-bg: #fef2f2;
+  --clear-text: #991b1b;
+  --clear-hover-bg: #fee2e2;
+  --clear-disabled-bg: #e5e7eb;
+  --clear-disabled-text: #6b7280;
 }
 
 body[data-theme="dark"] {
@@ -38,6 +43,11 @@ body[data-theme="dark"] {
   --filter-active-bg: rgba(52, 211, 153, 0.14);
   --filter_active_text: #34d399;
   --toggle-border: rgba(148, 163, 184, 0.3);
+  --clear-bg: rgba(248, 113, 113, 0.12);
+  --clear-text: #fca5a5;
+  --clear-hover-bg: rgba(248, 113, 113, 0.2);
+  --clear-disabled-bg: rgba(148, 163, 184, 0.12);
+  --clear-disabled-text: #cbd5e1;
 }
 
 * {
@@ -223,6 +233,34 @@ input {
   color: var(--text-sub);
 }
 
+.todo-footer-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.clear-completed-btn {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--clear-bg);
+  color: var(--clear-text);
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: background 0.2s ease, opacity 0.2s ease;
+}
+
+.clear-completed-btn:hover:not(:disabled) {
+  background: var(--clear-hover-bg);
+}
+
+.clear-completed-btn:disabled {
+  background: var(--clear-disabled-bg);
+  color: var(--clear-disabled-text);
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+
 .empty-state {
   margin: 16px 0 0;
   color: var(--text-sub);
@@ -265,5 +303,10 @@ input {
 
   .filter-group {
     flex-direction: column;
+  }
+
+  .todo-footer-row {
+    flex-direction: column;
+    align-items: flex-start;
   }
 }

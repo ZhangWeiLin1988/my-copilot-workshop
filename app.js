@@ -7,6 +7,7 @@ const todoInput = document.getElementById("todoInput");
 const todoList = document.getElementById("todoList");
 const todoCount = document.getElementById("todoCount");
 const emptyState = document.getElementById("emptyState");
+const clearCompletedBtn = document.getElementById("clearCompletedBtn");
 const themeToggle = document.getElementById("themeToggle");
 const themeToggleIcon = document.querySelector(".theme-toggle-icon");
 const themeToggleText = document.querySelector(".theme-toggle-text");
@@ -57,6 +58,25 @@ filterButtons.forEach((button) => {
     render();
   });
 });
+
+// 清除所有已完成項目
+if (clearCompletedBtn) {
+  clearCompletedBtn.addEventListener("click", () => {
+    const completedTodos = todos.filter((todo) => todo.completed);
+    if (completedTodos.length === 0) {
+      return;
+    }
+
+    const confirmed = window.confirm("確定要刪除所有已完成項目嗎？");
+    if (!confirmed) {
+      return;
+    }
+
+    todos = todos.filter((todo) => !todo.completed);
+    saveTodos();
+    render();
+  });
+}
 
 function initializeApp() {
   applyTheme(themePreference);
@@ -152,6 +172,20 @@ function updateFooter() {
   todoCount.textContent = `未完成:${remaining} 項`;
 }
 
+function updateClearCompletedButton() {
+  if (!clearCompletedBtn) {
+    return;
+  }
+
+  const hasCompletedTodos = todos.some((todo) => todo.completed);
+  clearCompletedBtn.disabled = !hasCompletedTodos;
+  clearCompletedBtn.hidden = !hasCompletedTodos;
+  clearCompletedBtn.setAttribute(
+    "aria-label",
+    hasCompletedTodos ? "清除所有已完成項目" : "目前沒有已完成項目"
+  );
+}
+
 function updateEmptyState(filteredTodos) {
   if (filteredTodos.length > 0) {
     emptyState.style.display = "none";
@@ -212,6 +246,7 @@ function render() {
   });
 
   updateFooter();
+  updateClearCompletedButton();
   updateEmptyState(filteredTodos);
   renderFilterButtons();
 }

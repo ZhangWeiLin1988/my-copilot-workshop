@@ -41,7 +41,17 @@
       <ul class="todo-list" id="todoList" aria-live="polite"></ul>
 
       <footer class="todo-footer">
-        <p id="todoCount">未完成:0 項</p>
+        <div class="todo-footer-row">
+          <p id="todoCount">未完成:0 項</p>
+          <button
+            id="clearCompletedBtn"
+            class="clear-completed-btn"
+            type="button"
+            aria-label="清除所有已完成項目"
+          >
+            清除已完成
+          </button>
+        </div>
       </footer>
     </section>
   </main>
